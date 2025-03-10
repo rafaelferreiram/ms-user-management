@@ -1,0 +1,404 @@
+openapi: 3.1.0
+info:
+  title: API ms-user
+  version: "1.0.0"
+  description: > 
+    API for managing users and groups integrated with Keycloak.
+    Provides CRUD operations for users and groups, as well as endpoints
+    to manage user-group memberships.
+    
+servers:
+  - url: http://{baseUrl}/ms-user/v1
+tags:
+  - name: User
+    description: API for operations related to user CRUD.
+  - name: Group
+    description: API for operations related to group CRUD.
+  - name: Membership
+    description: API for operations to manage membership between users and groups.
+paths:
+  /users:
+    get:
+      tags:
+        - User
+      summary: List Users
+      description: Retrieve a list of all users.
+      operationId: listUsers
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      tags:
+        - User
+      summary: Create User
+      description: Create a new user.
+      operationId: createUser
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: User object to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput"
+      responses:
+        "201":
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: Get User
+      description: Retrieve a user by ID.
+      operationId: getUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found.
+    put:
+      tags:
+        - User
+      summary: Update User
+      description: Update an existing user.
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated user object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput"
+      responses:
+        "200":
+          description: User updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      tags:
+        - User
+      summary: Delete User
+      description: Delete a user by ID.
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User deleted successfully.
+  /users/{id}/groups:
+    get:
+      tags:
+        - Membership
+      summary: List User Groups
+      description: List all groups a given user belongs to.
+      operationId: listUserGroups
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of groups the user belongs to.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+  /users/{id}/groups/{groupId}:
+    put:
+      tags:
+        - Membership
+      summary: Add User to Group
+      description: Add a user to a group.
+      operationId: addUserToGroup
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User added to group successfully.
+    delete:
+      tags:
+        - Membership
+      summary: Remove User from Group
+      description: Remove a user from a group.
+      operationId: removeUserFromGroup
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User removed from group successfully.
+  /groups:
+    get:
+      tags:
+        - Group
+      summary: List Groups
+      description: Retrieve a list of all groups.
+      operationId: listGroups
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: A list of groups.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+    post:
+      tags:
+        - Group
+      summary: Create Group
+      description: Create a new group.
+      operationId: createGroup
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Group object to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupInput"
+      responses:
+        "201":
+          description: Group created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+  /groups/{id}:
+    get:
+      tags:
+        - Group
+      summary: Get Group
+      description: Retrieve a group by ID.
+      operationId: getGroup
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Group details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "404":
+          description: Group not found.
+    put:
+      tags:
+        - Group
+      summary: Update Group
+      description: Update an existing group.
+      operationId: updateGroup
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the group to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated group object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupInput"
+      responses:
+        "200":
+          description: Group updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+    delete:
+      tags:
+        - Group
+      summary: Delete Group
+      description: Delete a group by ID.
+      operationId: deleteGroup
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the group to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Group deleted successfully.
+  /groups/{id}/users:
+    get:
+      tags:
+        - Membership
+      summary: List Group Users
+      description: List all users in a given group.
+      operationId: listGroupUsers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of users in the group.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1234"
+        username:
+          type: string
+          example: "johndoe"
+        email:
+          type: string
+          example: "john@example.com"
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+    UserInput:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+        email:
+          type: string
+          example: "john@example.com"
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+      required:
+        - username
+        - email
+        - firstName
+        - lastName
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5678"
+        name:
+          type: string
+          example: "Admins"
+    GroupInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Admins"
+      required:
+        - name

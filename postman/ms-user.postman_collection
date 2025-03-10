@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "27a4aac2-cbea-42fa-9654-326e2813f519",
+		"name": "ms-user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6395332"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"rafael\",\n  \"email\": \"rafael@example.com\",\n  \"firstName\": \"Rafael\",\n  \"lastName\": \"Matos\"\n}"
+						},
+						"url": {
+							"raw": "{{ms_user_base_url}}/users",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f8841f0b-e076-4f96-846f-84a740bccbfa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/search?email=rafael@example.com",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "rafael@example.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"janedoe\",\n  \"email\": \"jane@example.com\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Doe\"\n}"
+						},
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f8841f0b-e076-4f96-846f-84a740bccbfa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "List Groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Groups With Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups/with-users",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups",
+								"with-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admins\"\n}"
+						},
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "eba74924-2379-4137-8c05-5010d8fdf346"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Developers\"\n}"
+						},
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups/:id",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Membership",
+			"item": [
+				{
+					"name": "List User Groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id/groups",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"groups"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f8841f0b-e076-4f96-846f-84a740bccbfa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User To Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id/groups/:groupId",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"groups",
+								":groupId"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1468f4ba-3765-4318-aaa9-3ddfd4740913"
+								},
+								{
+									"key": "groupId",
+									"value": "0ebdd22d-651b-4e82-9d55-811c208239dc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User To Group By Email",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/email/:email/groups/:groupId",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								"email",
+								":email",
+								"groups",
+								":groupId"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "rafael@example.com"
+								},
+								{
+									"key": "groupId",
+									"value": "0ebdd22d-651b-4e82-9d55-811c208239dc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User From Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/users/:id/groups/:groupId",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"groups",
+								":groupId"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1468f4ba-3765-4318-aaa9-3ddfd4740913"
+								},
+								{
+									"key": "groupId",
+									"value": "0ebdd22d-651b-4e82-9d55-811c208239dc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Group Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer secret-token"
+							}
+						],
+						"url": {
+							"raw": "{{ms_user_base_url}}/groups/:id/users",
+							"host": [
+								"{{ms_user_base_url}}"
+							],
+							"path": [
+								"groups",
+								":id",
+								"users"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "0ebdd22d-651b-4e82-9d55-811c208239dc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "admin-cli",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"master",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/realms/master/protocol/openid-connect/token \\\r\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\r\n  -d \"grant_type=password&client_id=admin-cli&username=admin&password=admin\"\r\n"
+			},
+			"response": []
+		}
+	]
+}
